@@ -3,6 +3,10 @@
 import regex
 import sys, os
 
+import tempfile
+# OpenSCAD needs a main file, so we'll use a blank one
+blank = tempfile.NamedTemporaryFile()
+
 import multiprocessing as mp
 from multiprocessing.queues import Queue
 from threading import Thread
@@ -14,10 +18,11 @@ RE = f"^module\s+([\w]+)\([^)]*\)\s*//\s*AUTO_MAKE_STL\s*({RERANGE}|{RELIST})*.*
 
 modules = []
 
+
         
 def build_module(q, file, module, params):
     q.put(f"{file}: {module}({', '.join(params)})\n")
-    e = f"touch /tmp/blank.scad; openscad -o {module}{'-' if len(params) else ''}{'-'.join(params)}.stl -D 'use <{file}>; {module}({', '.join(params)});' /tmp/blank.scad"
+    e = f"openscad -o {module}{'-' if len(params) else ''}{'-'.join(params)}.stl -D 'use <{os.path.realpath(file)}>; {module}({', '.join(params)});' '{blank.name}'"
     q.put(e+"\n")
     os.system(e)
 
