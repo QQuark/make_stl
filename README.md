@@ -12,9 +12,9 @@ Alternative way of executing AUTO_MAKE_STL for OpenSCAD with the following advan
     module my_module(w, l, h, matw, math, xn, yn, hcap) // AUTO_MAKE_STL[790][190][105][20][2][1][1][10]
     ```
 
-- The generated stl file name will contain both the name of the module and the parameters
+- The generated stl file name will contain both the name of the module called and the parameters
 
-- Allows specifying ranges for parameters. Combinatorial configurations are accepted
+- Allows specifying ranges and lists for parameters. Combinatorial configurations are accepted
     ```scad
     module my_module(w, l, h, matw, math, xn, yn, hcap) // AUTO_MAKE_STL[790][190][105][20][2][1:4][1:2][10]
 
