@@ -12,7 +12,7 @@ from multiprocessing.queues import Queue
 from threading import Thread
 
 RERANGE = "\[\s*(\d+)\s*:\s*(\d+)\s*\]"
-RELIST = "\[(\s*(\w+)\s*,)*\s*(\w+)\s*,?\s*\]"
+RELIST = "\[(\s*(\"?[^\s\"]+\"?)\s*,)*\s*(\"?[^\s\"]+\"?)\s*,?\s*\]"
 
 RE = f"^module\s+([\w]+)\([^)]*\)\s*//\s*AUTO_MAKE_STL\s*({RERANGE}|{RELIST})*.*$"
 
